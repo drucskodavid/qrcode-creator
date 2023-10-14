@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR code generator</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;700&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>QR code generator</h1>
+        <label for="contentTx">Content (text or URL):
+            <input type="text" placeholder="https://example.com/" name="input-content" id="contentTx">
+            <span class="err-indicator" id="eiContent">Error indicator</span>
+        </label>
+
+        <div class="grid-2col">
+            <label for="widthInPixels">Output width (px):
+                <input type="number" placeholder="256" name="widthInPixels" id="widthInPixels">
+                <span class="err-indicator" id="eiWidth">Error indicator</span>
+            </label>
+
+            <label for="marginInPixels">Margin (px):
+                <input type="number" placeholder="0" name="marginInPixels" id="marginInPixels">
+                <span class="err-indicator" id="eiMargin">Error indicator</span>
+            </label>
+
+            <label for="fgColor">Color:
+                <input type="color" name="fgColor" id="fgColor">
+            </label>
+
+            <label for="bgColor">Background color:
+                <input type="color" value="#ffffff" name="bgColor" id="bgColor">
+            </label>
+        </div>
+
+        <div class="cb-vector">
+            <input type="checkbox" name="vector-output" id="vectorCb" class="vector-output">
+            <label for="vectorCb">SVG output (instead of PNG)</label>
+        </div>
+
+        <div class="img-box" id="ifImgReady" style="display: none;">
+            <div class="single-img">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?data=HelloWorld&amp;size=100x100&amp;format=svg" alt="" id="imgWrp" title="">
+                <a href="#" id="dlLinkBt">[Open in new tab]</a>
+            </div>
+        </div>
+
+        <input type="button" value="Generate" id="generateBt">
+
+        <div class="info-details">
+            <p>via <a href="https://goqr.me/api/" target="_blank">goqr.me/api</a></p>
+        </div>
+    </div>
+    <script src="./script.js"></script>
+</body>
+</html>
