@@ -31,30 +31,27 @@ function checkIfInt(string) {
     return /^\d+$/.test(string);
 }
 
-function checkIfForcedSvg(x){
-    if (x.checked){
+function checkIfForcedSvg(checkboxState){
+    if (checkboxState.checked){
         return 1000000;
     } else{
         return 1000;
     }
 }
 
-// Validate form - button on(C)lick
+// Validate form
 btGenerate.addEventListener('click', function(){
     // Validate field 1
     if(inputContent.value == ''){
-        console.log('A mező nem lehet üres!');
-        eiContent.innerHTML = 'A mező nem lehet üres!';
+        eiContent.innerHTML = "This field can't be empty!";
         eiContent.style.display = 'block';
         field1IsCorrect = false;
     } else if (inputContent.value.includes('&')){
-        console.log('A mező nem tartalmazhat "&" karaktert!');
-        eiContent.innerHTML = 'A mező nem tartalmazhat "&" karaktert!';
+        eiContent.innerHTML = "This field can't contain this symbol: &";
         eiContent.style.display = 'block';
         field1IsCorrect = false;
     } else{
         field1IsCorrect = true;
-        console.log(field1IsCorrect);
         eiContent.style.display = 'none';
     }
 
@@ -65,11 +62,9 @@ btGenerate.addEventListener('click', function(){
 
     if (checkIfInt(widthInPixels.value) && Number(widthInPixels.value) >= 10 && Number(widthInPixels.value) <= checkIfForcedSvg(cbSvgMode)){
         field2IsCorrect = true;
-        console.log(field2IsCorrect);
         eiWidth.style.display = 'none';
     } else{
-        console.log('Helytelen érték');
-        eiWidth.innerHTML = 'Érvénytelen érték! Min: 10, Max :' + checkIfForcedSvg(cbSvgMode);
+        eiWidth.innerHTML = 'Invalid value! Min: 10, Max: ' + checkIfForcedSvg(cbSvgMode);
         eiWidth.style.display = 'block';
         field2IsCorrect = false;
     }
@@ -82,15 +77,13 @@ btGenerate.addEventListener('click', function(){
     if(checkIfInt(marginInPixels.value) && Number(marginInPixels.value) >= 0 && Number(marginInPixels.value) <= 50){
         field3IsCorrect = true;
         eiMargin.style.display = 'none';
-        console.log(field3IsCorrect);
     } else{
         field3IsCorrect = false;
-        eiMargin.innerHTML = 'Érvénytelen érték! Max: 50, Min: 0';
+        eiMargin.innerHTML = 'Invalid value! Min: 0, Max: 50';
         eiMargin.style.display = 'block';
     }
 
     if(field1IsCorrect && field2IsCorrect && field3IsCorrect){
-        console.log('Minden mező helyes.');
         let fgColor_nohash = fgColor.value.split("#")[1];
         let bgColor_nohash = bgColor.value.split("#")[1];
         let format_filetype = 'png';
